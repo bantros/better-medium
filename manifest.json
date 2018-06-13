@@ -1,0 +1,23 @@
+{
+  "manifest_version": 2,
+  "name": "Better Medium",
+  "version": "0.1",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://blog.cloudboost.io/*",
+        "https://blog.hellojs.org/*",
+        "https://blog.logrocket.com/*",
+        "https://codeburst.io/*",
+        "https://hackernoon.com/*",
+        "https://levelup.gitconnected.com/*",
+        "https://medium.com/*",
+        "https://medium.freecodecamp.org/*"
+      ],
+      "js": ["content.js"]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "icon.png"
+  }
+}
