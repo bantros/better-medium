@@ -1,73 +1,33 @@
-// content.js
-
-const targets = [
-  '.butterBar',
-  '.js-overlayDialog',
-  '.js-metabar',
-  '.js-metabarSpacer',
-  '.js-stickyFooter',
-  '.js-meterBanner'
-];
-
-const hideElem = target => {
-  const nodeList = [...document.querySelectorAll(target)];
-
-  if (!nodeList) return;
-
-  nodeList.forEach(elem => {
-    elem.style.display = 'none';
-    elem.style.opacity = '0';
-  });
-};
-
-const render = () => {
-  if (window.location.pathname !== '/') {
-    targets.forEach(target => hideElem(target));
+const betterMedium = () => {
+  // Inject stylesheet
+  // Chrome/Firefox extension availability
+  if (typeof browser === 'undefined') {
+    browser = chrome;
   }
+
+  document.head.insertAdjacentHTML(
+    'beforeend',
+    '<link rel="stylesheet" type="text/css" href="' +
+      browser.runtime.getURL('better-medium.css') +
+      '">'
+  );
 };
 
-const mutationObserver = new MutationObserver(mutations => {
+const observer = new MutationObserver(mutations => {
   mutations.forEach(mutation => {
-    mutation.addedNodes.forEach(node => {
-      // console.log(mutation);
-
-      if (node.nodeType === Node.ELEMENT_NODE) {
-        if (node.classList.value === 'surface') {
-          setTimeout(() => {
-            render();
-          }, 500);
-        }
-
-        // if (node.classList.contains === 'js-meterBanner') {
-        //   console.log('js-meterBanner');
-        // }
-
-        if (node.classList.value === 'overlay overlay--lighter') {
-          document.documentElement.classList.remove('u-overflowHidden');
-          node.style.display = 'none';
-          node.style.opacity = '0';
-        }
-      }
-    });
+    betterMedium();
   });
 });
 
-// Starts listening for changes in the root HTML element of the page.
-mutationObserver.observe(document.body, {
-  attributes: false,
-  characterData: false,
-  childList: true,
-  subtree: true,
-  attributeOldValue: false,
-  characterDataOldValue: false
-});
+if (
+  document.querySelector(
+    'head meta[property="al:ios:app_name"][content="medium" i]'
+  )
+) {
+  betterMedium();
 
-render();
-
-// chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-//   if (request.message === 'changeInfo.url') {
-//     setInterval(() => {
-//       render();
-//     }, 0);
-//   }
-// });
+  // Watch for changes to body
+  observer.observe(document.body, {
+    attributes: true
+  });
+}

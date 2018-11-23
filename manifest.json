@@ -1,26 +1,17 @@
 {
   "manifest_version": 2,
   "name": "Better Medium",
-  "version": "0.3",
-  "permissions": [
-    "tabs"
-  ],
+  "version": "0.4.1",
+  "description": "Make Medium better.",
+  "icons": {
+    "128": "icon.png"
+  },
   "content_scripts": [
     {
-      "matches": [
-        "https://blog.cloudboost.io/*",
-        "https://blog.hellojs.org/*",
-        "https://blog.logrocket.com/*",
-        "https://codeburst.io/*",
-        "https://hackernoon.com/*",
-        "https://levelup.gitconnected.com/*",
-        "https://medium.com/*",
-        "https://medium.freecodecamp.org/*"
-      ],
+      "matches": ["https://*/*"],
       "js": ["content.js"]
     }
   ],
-  "browser_action": {
-    "default_icon": "icon.png"
-  }
+  "permissions": ["https://*/*", "storage", "tabs"],
+  "web_accessible_resources": ["better-medium.css"]
 }

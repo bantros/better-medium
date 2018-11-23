@@ -1,0 +1,37 @@
+/**
+ * Never allow overflow-y to be hidden on html
+ */
+
+html.u-overflowHidden {
+  overflow-y: scroll !important;
+}
+
+/**
+ * Unsticky header
+ */
+
+.metabar {
+  position: relative !important;
+}
+
+/**
+ * Hide the following:
+ * Privacy/Cookies bar
+ * Fixed header spacer
+ * Sticky footer
+ * 
+ * Sticky upgrade bar "Smart stories. New ideas...
+ * "Pardon the interuption" fullscreen modal
+ * "Never miss a story..." fullscreen modal
+ */
+
+.butterBar--privacy,
+.metabar--spacer,
+.js-stickyFooter,
+.js-overlayDialog,
+.js-meterBanner,
+.overlay[data-action-scope="_actionscope_8"],
+.overlay[data-action-scope="_actionscope_11"] {
+  display: none;
+  opacity: 0;
+}
