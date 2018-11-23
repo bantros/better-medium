@@ -1,7 +1,10 @@
 {
   "manifest_version": 2,
   "name": "Better Medium",
-  "version": "0.1",
+  "version": "0.3",
+  "permissions": [
+    "tabs"
+  ],
   "content_scripts": [
     {
       "matches": [
